@@ -1,0 +1,208 @@
+$colors: (
+  primary: #ddd,
+  dark: #333,
+  light: #fff,
+  shadow: 0 1px 5px rgba(104, 104, 104, 0.8)
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$desktop: 700px;
+$small: 500px;
+@mixin desktop {
+    @media screen and (max-width: $desktop){
+        @content; //content*****
+    }
+}
+
+@mixin small{
+    @media screen and (max-width: $small) {
+        @content;
+    }
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Franklin Gothic", "Arial Narrow", Arial, sans-serif;
+  color: color(dark);
+}
+.btn {
+  background: color(dark);
+  color: color(light);
+  padding: 0.6rem 1.3rem;
+  text-decoration: none;
+  border: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  background: #ccc;
+  margin: 30px 50px;
+  line-height: 1.4;
+  .wrapper {
+    display: grid;
+    grid-gap: 20px;
+
+    .main-nav {
+        
+      ul {
+        @include desktop{
+            grid-template-columns: 1fr;
+        }
+        display: grid;
+        grid-gap: 20px;
+        padding: 0;
+        list-style: none;
+        grid-template-columns: repeat(4, 1fr);
+        // grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+      a {
+        background: color(primary);
+        display: block;
+        text-decoration: none;
+        padding: 0.8rem;
+        text-align: center;
+        color: color(dark);
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        box-shadow: color(shadow);
+      }
+      a:hover {
+        background: color(dark);
+        color: color(light);
+      }
+    }
+
+    .top-container {
+
+        @include desktop{
+            grid-template-areas: 
+            'showcase showcase'
+            'top-box-a top-box-b'
+        }
+
+        @include small{
+            grid-template-areas: 
+            'showcase'
+            'top-box-a'
+            'top-box-b'
+        }
+
+      display: grid;
+      grid-gap: 20px;
+      grid-template-areas:
+        "showcase showcase top-box-a"
+        "showcase showcase top-box-b";
+    }
+    .showcase {
+      grid-area: showcase;
+      min-height: 400px;
+      background: {
+        image: url(https://image.ibb.co/kYJK8x/showcase.jpg);
+        size: cover;
+        position: center;
+      }
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
+      box-shadow: color(shadow);
+      h1 {
+        @include desktop{
+            font-size: 2.5rem;
+        }
+        font-size: 4rem;
+        margin-bottom: 0;
+        color: color(light);
+      }
+      p {
+        font-size: 1.3rem;
+        margin-top: 0;
+        color: color(light);
+      }
+    }
+
+    .top-box-a {
+      grid-area: top-box-a;
+    }
+    .top-box-b {
+      grid-area: top-box-b;
+    }
+
+    .top-box {
+      background: color(primary);
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      box-shadow: color(shadow);
+      padding: 1.5rem;
+
+      .price {
+        font-size: 2.5rem;
+      }
+    }
+
+    .boxes {
+      display: grid;
+      grid: {
+        gap: 20px;
+        template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+
+      .box {
+          background: color(primary);
+          text-align: center;
+          padding: 1.5rem 2rem;
+          box-shadow: color(shadow);
+      }
+    }
+
+    .info{
+        @include desktop{
+            grid-template-columns: 1fr;
+        }
+        background: color(primary);
+        box-shadow: color(shadow);
+        display: grid;
+        grid: {
+            gap: 30px;
+            template-columns: repeat(2, 1fr);
+        }
+        padding: 3rem;
+
+        .btn{
+            @include desktop{
+                display: block;
+                text-align: center;
+                margin: auto;
+            }
+        }
+    }
+
+    .portfolio{
+        display: grid;
+        grid: {
+            gap: 20px;
+            template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        img{
+            width: 100%;
+            box-shadow: color(shadow)
+        }
+    }
+
+    footer{
+        margin-top: 2rem;
+        background: color(dark);
+        color: color(light);
+        text-align: center;
+        padding: 1rem;
+    }
+  }
+}
